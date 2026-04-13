@@ -3,9 +3,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserDetailContext } from "@/context/UserDetailContext";
+import { UserInputContext } from "@/context/UserInputContext";
 
 function Provider({ children }: any) {
   const [userDetail, setUserDetail] = useState<any>(null);
+  const [userDesignRequest, setUserDesignRequest] = useState<any>(null);
 
   const createNewUser = async () => {
     try {
@@ -22,7 +24,11 @@ function Provider({ children }: any) {
 
   return (
     <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
-      <div>{children}</div>
+      <UserInputContext.Provider
+        value={{ userDesignRequest, setUserDesignRequest }}
+      >
+        <div>{children}</div>
+      </UserInputContext.Provider>
     </UserDetailContext.Provider>
   );
 }
